@@ -1,4 +1,4 @@
-
+W
 
 def pig_latin
 gets.chomp.gsub(/\b([^aeiou ]+)([aeiou]\w*)/,'\2\1ay').downcase.capitalize
