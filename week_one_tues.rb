@@ -22,6 +22,7 @@ array.each_slice(3) { |a| result << a.sort }
 result
 end
 
+http://www.tutorialspoint.com/ruby/ruby_regular_expressions.htm
 def destroy_message!(string)
 string.include?(":") ? string.gsub!(/:.*/,":") : nil
 end
