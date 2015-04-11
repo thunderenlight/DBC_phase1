@@ -1,0 +1,188 @@
+class Sudoku
+  attr_reader :board_string, :board_array
+
+  def initialize(board_string)
+    @board_string = board_string
+    @board_array = board_array
+  end
+
+  def board_array
+    @board_array = board_string.split("")
+    #our first method takes in full string and splits each character
+    # into an array, each char is an element
+    #index of array corresponds to order within the string
+  end
+
+  def board_length
+    puts board_array.length
+  end
+
+  def find_row(index)
+    #give an index and collection and the ouput will give us a number coorespinding to the row of that index
+    row_num = index/9
+  end
+
+  def find_col(index)
+    #give an index and collection and the ouput will give us a number coorespinding to the column of that index
+    col_num = index % 9
+  end
+
+  def find_box(index)
+    #give an index and collection and the ouput will give us a number coorespinding to the box of that index
+    box_row = find_row(index) /3
+    box_col = find_col(index) /3
+    (box_row * 3) + box_col
+  end
+
+  def check_row(search_index)
+    array_for_index = []
+    @board_array.each_with_index do |item, index|
+      if find_row(index) == find_row(search_index)
+        array_for_index << item
+      end
+    end
+      array_for_index
+  end
+
+  def check_col(search_index)
+    array_for_index = []
+    @board_array.each_with_index do |item, index|
+      if find_col(index) == find_col(search_index)
+        array_for_index << item
+      end
+    end
+      array_for_index
+  end
+
+  def check_box(search_index)
+    array_for_index = []
+    @board_array.each_with_index do |item, index|
+      if find_box(index) == find_box(search_index)
+        array_for_index << item
+      end
+    end
+    array_for_index
+  end
+
+  def find_empties(collection)
+    #looks for "-"s inside collection
+    # returns an array of indices of these
+    empty_indices = []
+    collection.each_with_index do |item, index|
+      if collection[index] ==  "-"
+        empty_indices << index
+      end
+    end
+    empty_indices
+  end
+
+  def find_others(index)
+    #takes an index, returns a number 1 through 9, minus
+    # what is already in the row, col, box for that index
+    #input = index of empty cell (answer array)
+    # find the num in the find box  ask for find row for index
+    # output =
+    possibilities_row = []
+    possibilities_row = check_row(index).select { |value| value != "-"}
+    possibilities_col = []
+    possibilities_col = check_col(index).select { |value| value != "-"}
+    possibilities_box = []
+    possibilities_box = check_box(index).select { |value| value != "-"}
+    all_possibilites = []
+    all_possibilites  = (possibilities_box + possibilities_col + possibilities_row
+    ).uniq
+   end
+
+
+  def find_possibilities(index)
+    int_array = find_others(index).map {|string_num|string_num.to_i}
+    (1..9).to_a - int_array
+  end
+    #replace the empties with the possible array in place
+    # go through every cell of the main collection running find the
+    # find_possibility and if it returns length one array we want to
+
+    # replace the dash that we are at with the one
+    #find the cells in find_empties that when you call find_possibilities on them,
+    #they return an array of length 1
+    #replace those those empties with the number inside that length 1 array
+    # run it again
+
+  def find_solvable
+    solvable_array = []
+    find_empties(@board_array).each do |empty|
+      if find_possibilities(empty).length == 1
+        solvable_array << empty
+      end
+    end
+    solvable_array
+  end
+
+  #separate method for changing all non-dashes to fixnums
+  def convert_collection(collection)
+    new_collection = []
+    collection.each do |element|
+      if element != "-"
+        new_collection << element.to_i
+      else
+        new_collection << element
+      end
+    end
+    new_collection
+  end
+
+  #find_solvable gives us an array of indices of empty cells in the whole board
+  #where we can for certain solve the cell
+  # solve: replace the dash with the find_possibility of that index
+  # search again, solve again
+  def solve
+    until
+      @board_array.any?{|i| i = "-"} == false
+    # old_board = collection
+    convert_collection(@board_array)
+    find_solvable.each do |index_for_collection|
+    @board_array[index_for_collection] = find_possibilities(index_for_collection)[0]
+   @board_array
+    #until answers_collection.all? == fixnum
+    # while
+    #   answers_collection.any?{|v,index| index == "-"}
+    #  collection.each_with_index do |index_for_collection|
+    #     answers_collection[index_for_collection] = find_possibilities(index_for_collection)[0] #we want the zero thing
+    #     break
+
+      end
+    end
+
+
+    #solve(new_board)
+  end
+
+
+
+  # solve says until everything in the collection is a fixnum, keep running solve
+
+  def board
+  end
+
+  # Returns a string representing the current state of the board
+  def to_s
+
+  end
+end
+
+test_sudoku = Sudoku.new("1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--")
+
+# pp test_sudoku.board_array
+# test_sudoku.board_length
+ #test_sudoku.find_row(13)
+# p test_sudoku.check_row(13)
+# p test_sudoku.board_array
+#p test_sudoku.check_box(13)
+#p test_sudoku.find_empties
+# p test_sudoku.find_possibilities(13)
+ # test_sudoku.find_others(13)
+p test_sudoku.find_solvable
+p test_sudoku.solve
+
+# p test_sudoku.convert_collection(["1", "2", 3])
+p test_sudoku.solve
