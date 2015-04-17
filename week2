@@ -1,1 +1,147 @@
+# require 'debugger'
+require 'csv'
+# What classes do you need?
 
+# Remember, there are four high-level responsibilities, each of which have multiple sub-responsibilities:
+# 1. Gathering user input and taking the appropriate action (controller)
+# 2. Displaying information to the user (view)
+# 3. Reading and writing from the todo.txt file (persisting models to non-volatile storage, aka "the hard drive")
+# 4. Manipulating the in-memory objects that model a real-life TODO list (model)
+
+# Note that (4) is where the essence of your application lives.
+# Pretty much every application in the universe has some version of responsibilities (1), (2), and (3).
+
+# Release 0
+# Have a list
+# Add a task
+# Get a list of tasks - Print tasks
+# Create tasks, interact with lists
+
+# Delete a task
+# Complete a task
+# Release 2
+# Have a way of displaying the complete as a visual
+# [ ] = not checked 
+
+
+class List
+
+attr_reader :tasks
+
+  def initialize
+    @tasks = []
+    read_task_file
+  end
+
+  def read_task_file
+    CSV.foreach("todo.csv", headers: true, header_converters: :symbol) do |line|
+      add_task!(line)
+    end
+  end
+
+  def add_task!(task)
+    if task.is_a?(String)
+      @tasks << Task.new(task: task)
+    else # CSV object/hash
+      @tasks << Task.new(task)
+    end
+  end
+
+  def complete_task!(num)
+    @tasks[num.to_i - 1].mark_as_complete!
+  end
+
+  def check_complete(num)
+    # mark_as_complete!
+    if @tasks[num.to_i - 1].complete?
+      "[X] #{task}"
+    else
+      "[ ] #{task}"
+    end
+  end
+
+
+  # def complete?
+  #   complete.includes?(num)
+  # end
+  def delete_task!(num)
+    @tasks.delete_at(num.to_i - 1) # "3" - 1
+    update_tasks!
+  end
+
+  def update_tasks!
+    Task.reset_id!
+    @tasks.each(&:set_id!)
+  end
+end
+
+class Task
+
+  attr_reader :task
+
+  @@id = 0
+
+  def self.reset_id!
+    @@id = 0
+  end
+
+  def initialize(task_arguments)
+    @task = task_arguments[:task]
+    @complete = task_arguments[:complete]
+    set_id!
+  end
+
+  def to_s
+    "#{@id}. #{task}"
+  end
+
+  def mark_as_complete!
+    @complete = true
+
+  end
+
+  def complete?
+    @complete ||= false
+
+  end
+  # def check_complete
+  #   if complete?
+  #     "[X] #{task}"
+  #   else
+  #     "[ ] #{task}"
+  #   end
+
+  # end
+
+  def set_id!
+    @id = @@id += 1
+  end
+
+end
+
+list = List.new
+list.add_task!("Buy groceries")
+puts list.tasks
+puts list.tasks.length == 14
+list.complete_task!(1) # Human readable number
+puts list.tasks[0].complete? == true
+puts list.tasks[0].check_complete
+puts task.display_checkbox
+# list.delete_task!(3)
+# puts list.tasks.length == 13
+# puts list.tasks[2].task == "Walk into town seeking revenge"
+task.complete_task!
+
+commands = Hash.new { |hash, key| hash[key] = "#{key}_task!" }
+
+if ARGV.any?
+  list = List.new
+  command = ARGV.shift
+  case command
+  when "list"
+    puts list.tasks
+  when "delete", "complete", "add"
+    list.send(commands[command], ARGV.join(" "))
+    puts list.tasks
+  end
+end
