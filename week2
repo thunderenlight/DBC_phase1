@@ -21,7 +21,7 @@ require 'csv'
 # Complete a task
 # Release 2
 # Have a way of displaying the complete as a visual
-# [ ] = not checked 
+# [ ] =
 
 
 class List
@@ -39,6 +39,29 @@ attr_reader :tasks
     end
   end
 
+  def list_to_file
+    file = File.open('new_file','w+')
+    tasks.each do |task|
+      # output = "#{task.id}. ["
+      # output += (task.complete? ? "X" : " " )
+      # output += "] #{task} \n"
+       file << "#{task}\n"
+    end
+      file.close
+
+  end
+
+  # def human_readable(filename)
+  #   file = File.open(filename,'w+')
+  #   tasks.each do |id,task|
+  #     output = "#{id}. ["
+  #     output += (task.completed ? "X" : " ")
+  #     output += "]  #{task.text}\n"
+  #     file << output
+  #   end
+  #   file.close
+  # end
+
   def add_task!(task)
     if task.is_a?(String)
       @tasks << Task.new(task: task)
@@ -49,15 +72,6 @@ attr_reader :tasks
 
   def complete_task!(num)
     @tasks[num.to_i - 1].mark_as_complete!
-  end
-
-  def check_complete(num)
-    # mark_as_complete!
-    if @tasks[num.to_i - 1].complete?
-      "[X] #{task}"
-    else
-      "[ ] #{task}"
-    end
   end
 
 
@@ -78,6 +92,7 @@ end
 class Task
 
   attr_reader :task
+  attr_accessor :check_complete
 
   @@id = 0
 
@@ -92,7 +107,7 @@ class Task
   end
 
   def to_s
-    "#{@id}. #{task}"
+    "#{@id}" + check_complete + "#{task}"
   end
 
   def mark_as_complete!
@@ -102,7 +117,11 @@ class Task
 
   def complete?
     @complete ||= false
+  end
 
+  def check_complete   # mark_as_complete!
+      # if @tasks[num.to_i - 1].complete?
+        @complete ? " [X] " : " [ ] "
   end
   # def check_complete
   #   if complete?
@@ -121,16 +140,20 @@ end
 
 list = List.new
 list.add_task!("Buy groceries")
-puts list.tasks
-puts list.tasks.length == 14
-list.complete_task!(1) # Human readable number
+# puts list.tasks
+# puts list.tasks.length == 14
+# list.complete_task!(1) # Human readable number
 puts list.tasks[0].complete? == true
-puts list.tasks[0].check_complete
-puts task.display_checkbox
+# puts list.check_complete(1)
+# puts task.display_checkbox
 # list.delete_task!(3)
 # puts list.tasks.length == 13
-# puts list.tasks[2].task == "Walk into town seeking revenge"
-task.complete_task!
+ puts list.tasks[2].task == "Walk into town seeking revenge"
+p list.tasks[1].mark_as_complete!
+puts list.tasks
+
+puts list.tasks[1]
+list.list_to_file
 
 commands = Hash.new { |hash, key| hash[key] = "#{key}_task!" }
 
