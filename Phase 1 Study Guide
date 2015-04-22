@@ -1,0 +1,20 @@
+Study Guide
+
+*first two weeks
+*key challenges
+*SQL* select where join insert update delete
+
+include rspec helper
+include OO Class / Module helper
+include links to in evernote
+  include good examples in (to be added to mine)
+  chi-pocket-gophers-2015/design-drill-code-style-challenge
+    https://github.com/chi-pocket-gophers-2015/design-drill-code-style-challenge/blob/pair-huyhuynh408%2Cpetermanhart/source/stylish_code.rb
+    https://github.com/chi-pocket-gophers-2015/design-drill-code-style-challenge/blob/pair-huyhuynh408%2Cpetermanhart/source/stylish_code_spec.rb
+  Algorithm Drill Shuffle
+  https://github.com/chi-pocket-gophers-2015/algorithm-drill-shuffle-challenge
+  https://github.com/chi-pocket-gophers-2015/algorithm-drill-shuffle-challenge/blob/pair-thunderenlight%2Cwerbeckes/source/shuffler.rb  
+
+include OO class with a board and rspec
+
+tbc...
