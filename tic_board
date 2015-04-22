@@ -47,6 +47,9 @@ class Board
     end.join("\n#{'-' * 9}\n")
   end
 end
+
+def to_s
+"%-5s - %s" %[self.complete?, self.text]  #Kernelsprintf
 require_relative 'board'
 
 board = Board.new
