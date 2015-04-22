@@ -4,17 +4,30 @@ Study Guide
 *key challenges
 *SQL* select where join insert update delete
 
+  Basic resources link
+  https://github.com/chi-pocket-gophers-2015/phase-1-guide/blob/chicago/resources/resources.md
 include rspec helper
 include OO Class / Module helper
 include links to in evernote
-  include good examples in (to be added to mine)
+  include good examples in (to be studied mine)
   chi-pocket-gophers-2015/design-drill-code-style-challenge
     https://github.com/chi-pocket-gophers-2015/design-drill-code-style-challenge/blob/pair-huyhuynh408%2Cpetermanhart/source/stylish_code.rb
     https://github.com/chi-pocket-gophers-2015/design-drill-code-style-challenge/blob/pair-huyhuynh408%2Cpetermanhart/source/stylish_code_spec.rb
   Algorithm Drill Shuffle
   https://github.com/chi-pocket-gophers-2015/algorithm-drill-shuffle-challenge
   https://github.com/chi-pocket-gophers-2015/algorithm-drill-shuffle-challenge/blob/pair-thunderenlight%2Cwerbeckes/source/shuffler.rb  
-
+  
+  Boggle Board
+  https://github.com/chi-pocket-gophers-2015/boggle-2-word-checker-challenge/blob/solo-petermanhart/source/boggle_board.rb
 include OO class with a board and rspec
+  Ruby Racer
+  
+  CSV Parser
+  https://github.com/chi-pocket-gophers-2015/parsing-data-1-csv-in-csv-out-challenge/blob/pair-petermanhart%2Cwerbeckes/source/serialization.rb
+
+  **Hospital Interface
+  https://github.com/chi-pocket-gophers-2015/hospital-interface-challenge/edit/thunderenlight/hospital_interface.rb
+  **AWESOME OOP EXAMPLES**
+  https://gist.github.com/brickthorn/69d4feddd5857ba69a7f
 
 tbc...
