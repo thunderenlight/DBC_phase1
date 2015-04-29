@@ -1,0 +1,67 @@
+ActiveRecord
+
+CREATE TABLE dogs (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR
+age, INTEGER,
+owner_id INTEGER
+created_at DATEATIME,
+updated_at DATETIME);
+
+
+class CreateDogs < ActiveRecord::Migration
+  def change
+    create_table :dogs do |t|
+    t.string  :name
+    t.string  :license
+    t.integer :age
+    t.integer :weight
+
+    t.timestamps
+    end
+  end
+end
+
+questions what does base vs migrate stand for and why isnt there any thing like ::SEED :colon vs colon:
+
+Dog.create[{name: "Toot"}, {name: "Cosmo"}]
+
+BELONGS to in ActiveRecord console vs Ruby
+belongs to comes with a method to #create
+our_rating.dog
+
+We're calling the getter method provided to us by the belongs_to method.
+We're able to retrieve the Dog object to which an instance of Rating belongs through this method. In this case, this rating is for the dog Tenley.
+
+other_dog = Dog.find(3)
+
+We're assigning the variable other_dog to another instance of Dog,
+the one with the id of 3.
+
+our_rating.dog = other_dog
+
+We're calling the setter method provided by belongs_to to change the instance of
+Dog to which our_rating belongs.
+
+
+
+Validations??
+
+validates :license, format: { with: /\A[A-Z]{2}\-/ }
+validates :age, { numericality: {greater_than_or_equal_to: 0},
+                  allow_blank: true }
+Queries???
+
+select*from legislator where  senators
+sort by name
+where reps
+sort by name
+legislator.where(party: "sen")
+sen = Legislator.where(party: 'sen')
+sen = Legislator.lastname
+sen = Legislator.party
+reps = Legislator.where(party: 'reps')
+reps = Legislator.lastname
+sen_count = Legislator.where(gender: abbr_gen, title: "Sen", in_office: true).count
+sen_percent = sen_count / Legislator.where(title: "Sen", in_office: true).count.to_f
+
