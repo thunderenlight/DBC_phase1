@@ -15,3 +15,5 @@ change_column(table_name, column_name, type, options): Changes the column to a d
 remove_column(table_name, column_name, type, options): Removes the column named column_name from the table called table_name.
 
 feedback_loop
+study and read
+http://www.sitepoint.com/ruby-net-http-library/
