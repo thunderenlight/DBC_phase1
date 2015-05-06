@@ -17,3 +17,4 @@ remove_column(table_name, column_name, type, options): Removes the column named 
 feedback_loop
 study and read
 http://www.sitepoint.com/ruby-net-http-library/
+https://github.com/augustl/net-http-cheat-sheet
