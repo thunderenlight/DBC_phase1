@@ -1,4 +1,4 @@
-W
+#regex ref link = http://www.ralfebert.de/snippets/ruby-rails/regex_cheat_sheet/
 
 def pig_latin
 gets.chomp.gsub(/\b([^aeiou ]+)([aeiou]\w*)/,'\2\1ay').downcase.capitalize
