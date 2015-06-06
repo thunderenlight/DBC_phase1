@@ -1,0 +1,31 @@
+
+
+
+http://guides.rubyonrails.org/active_record_basics.html
+
+
+# find all users named David who are Code Artists and sort by created_at in reverse chronological order
+users = User.where(name: 'David', occupation: 'Code Artist').order('created_at DESC')
+
+
+$ ruby todo.rb list:outstanding
+lists = Lists.where(tasks.all(completed: 'done').order('created_at')
+counted_todo = Todo.group(:status).count
+
+Class List
+has_many :todos
+has_many :tags, through :todos
+Class todo_tag
+belongs_to :todo
+belongs_to :tags
+my_todo = Toodo.create(content: "Hugs")
+my_tag = Tag.create(content: "Niceties")
+Todo_tag.create(todo: my_todo, tag: my_tag )
+Todo_tag.create(todo_id: my_todo.id, tag_id: my_tag.id )
+my_todo.tags << my_tag
+my_tag.todos << my_todo
+
+
+http://guides.rubyonrails.org/active_record_migrations.html
+
+http://www.codequizzes.com/learn-sql-with-rails/where-order-limit-offset-queries
